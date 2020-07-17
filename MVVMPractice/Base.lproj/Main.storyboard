@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Stock Search View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="StockSearchViewController" customModule="MVVMPractice" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a0A-dT-xNb">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                <items>
+                                    <navigationItem title="Title" id="emF-Jf-dJt"/>
+                                </items>
+                            </navigationBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="DYb-Cv-mtX">
+                                <rect key="frame" x="0.0" y="44" width="375" height="623"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="DYb-Cv-mtX" secondAttribute="bottom" id="6E2-1C-lpb"/>
+                            <constraint firstItem="DYb-Cv-mtX" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="B6E-SB-mFF"/>
+                            <constraint firstItem="a0A-dT-xNb" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="IIf-yy-5Zj"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="a0A-dT-xNb" secondAttribute="trailing" id="Mp8-f5-bYf"/>
+                            <constraint firstItem="DYb-Cv-mtX" firstAttribute="top" secondItem="a0A-dT-xNb" secondAttribute="bottom" id="VJR-5M-jza"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="DYb-Cv-mtX" secondAttribute="trailing" id="bxQ-J7-Ych"/>
+                            <constraint firstItem="a0A-dT-xNb" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="kbX-2i-Y6F"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <connections>
+                        <outlet property="searchTableView" destination="DYb-Cv-mtX" id="ZzH-W4-xfq"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-310" y="-72"/>
+        </scene>
+    </scenes>
+</document>
