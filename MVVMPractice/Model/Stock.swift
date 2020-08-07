@@ -10,13 +10,13 @@
 import Foundation
 
 // MARK: - Stock
-struct Stock: Codable {
+struct Stock: Decodable {
     let ok: Bool
     let users: [User]
 }
 
 // MARK: - User
-struct User: Codable {
+struct User: Decodable {
     let avatarUrl: String
     let displayName: String
     let id: Int
