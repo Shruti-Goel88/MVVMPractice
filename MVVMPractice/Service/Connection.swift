@@ -9,34 +9,63 @@
 import Foundation
 import UIKit
 
-class Connection: NSObject {
+class Connection: ConnectionProtocol {
     
-    
-    
-    func makePostCall(request : URLRequest , success : @escaping(Data , HTTPURLResponse)-> Void , failure : @escaping(Error)-> Void )  {
-        let configuration = URLSessionConfiguration.default
-        let urlSession = URLSession(configuration: configuration)
-        let requestTask = urlSession.dataTask(with: request) { (data, response, error) in
+        
+     func makeGetNetworkCall<T: Decodable>(urlString : String , resultType :T.Type, completionHandler : @escaping (Result<T , Error>)-> Void)  {
+        
+        let urlRequest = URLRequest.init(url: URL(string: urlString)!)
+        URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
             DispatchQueue.main.async {
                 if let err = error
                 {
-                    failure(err)
+                    completionHandler(.failure(err))
                 }
                 guard let requestData = data, let requestResponse = response as? HTTPURLResponse else {
-                    failure(error!)
+                    completionHandler(.failure(error!))
                     return
                 }
-                success(requestData, requestResponse)
+                if requestResponse.statusCode == 200
+                {
+                    let decoder = JSONDecoder.init()
+                    do {
+                        let data =  try decoder.decode(resultType.self, from: requestData)
+                        completionHandler(.success(data))
+                    } catch let error {
+                        completionHandler(.failure(error))
+                    }
+                }
             }
-        }
-        requestTask.resume()
+        }.resume()
         
     }
-
     
-    
-    let closure = {(name : String) -> String   in
+    static func makePostNetworkCall<T:Decodable>(urlString: String , resultType: T.Type , requestBody: Data, completionHandler: @escaping(Result<T, Error>)->Void)
+    {
+        var urlRequest = URLRequest.init(url: URL(string: urlString)!)
+        urlRequest.httpMethod = "POST"
+        urlRequest.httpBody = requestBody
+        urlRequest.addValue("application/json", forHTTPHeaderField: "content-type")
+        URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
+            DispatchQueue.main.async {
+                if let err = error
+                {
+                    completionHandler(.failure(err))
+                }
+                guard let requestData = data, let requestResponse = response as? HTTPURLResponse else {
+                    completionHandler(.failure(error!))
+                    return
+                }
+                
+                    let decoder = JSONDecoder.init()
+                    do {
+                        let data =  try decoder.decode(resultType.self, from: requestData)
+                        completionHandler(.success(data))
+                    } catch let error {
+                        completionHandler(.failure(error))
+                    }
+                
+            }         }.resume()
         
-         return name
     }
 }
