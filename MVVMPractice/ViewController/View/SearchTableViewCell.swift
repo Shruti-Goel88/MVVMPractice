@@ -12,7 +12,7 @@ class SearchTableViewCell: UITableViewCell {
 
     @IBOutlet weak var dislaynameLbl: UILabel!
     @IBOutlet weak var idLbl: UILabel!
-    @IBOutlet weak var userImageVw: UIImageView!
+    @IBOutlet weak var userImageVw: CircularImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

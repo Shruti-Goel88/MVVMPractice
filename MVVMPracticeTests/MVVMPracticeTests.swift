@@ -12,7 +12,17 @@ import XCTest
 class MVVMPracticeTests: XCTestCase {
 
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+
+        super.setUp()
+        _ = MockConnectionClient().makeGetNetworkCall(urlString: Constants.stockUserApi , resultType : Stock.self) { (result) in
+                   switch result {
+                   case .failure(let error):
+                       print(error)
+                   case .success(let data):
+                       let stockDetails = data
+                       XCTAssert(stockDetails.users[0].displayName == "Brooklyn Huffman" , "true")
+                   }
+               }
     }
 
     override func tearDownWithError() throws {
